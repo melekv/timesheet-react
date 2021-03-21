@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
 import Profile from './components/Profile';
+import Timesheet from './components/Timesheet';
 import Footer from './components/Footer';
 
 const App = () => {
@@ -14,6 +15,9 @@ const App = () => {
         <Router>
             <Header />
             <Switch>
+                <Route path="/timesheet">
+                    <Timesheet />
+                </Route>
                 <Route path="/profile">
                     <Profile />
                 </Route>

@@ -10008,12 +10008,39 @@ header {
 }
 
 main {
-  background-color: #ccc;
-  height: calc(100vh - 70px - 70px);
+  min-height: calc(100vh - 70px - 70px - 1px);
 }
 
 footer {
   padding-top: 10px;
   background-color: #ddd;
   height: 70px;
+}
+
+.timesheet {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: 30px auto;
+}
+
+.timesheet > div:not(:nth-child(7n+7)) {
+  border-right: 1px solid #999;
+}
+
+.timesheet > div {
+  border-bottom: 1px solid #999;
+}
+
+.timesheet > div:nth-child(-n+7) {
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  background-color: #999;
+  border-radius: 5px;
+  padding-left: 5px;
+  margin-bottom: 2px;
 }
