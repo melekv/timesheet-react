@@ -1,7 +1,5 @@
-// require('./bootstrap');
-
 import ReactDOM from 'react-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // COMPONENTS
@@ -13,14 +11,26 @@ import Footer from './components/Footer';
 import SideBar from './components/SideBar';
 
 const App = () => {
-    const [sideBar, setSideBar] = useState(true);
+    const [sideBar, setSideBar] = useState(false);
+    const [workData, setWorkData] = useState([]);
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    const loadData = async() => {
+        const res = await fetch('data/work/21_04');
+        const data = await res.json();
+        console.log(data);
+        setWorkData(data);
+    };
 
     return (
         <Router>
             <Header />
             <Switch>
                 <Route path="/timesheet">
-                    <Timesheet sideBarProp={() => setSideBar(true)} />
+                    <Timesheet workData={workData} sideBarProp={() => setSideBar(true)} />
                 </Route>
                 <Route path="/profile">
                     <Profile />

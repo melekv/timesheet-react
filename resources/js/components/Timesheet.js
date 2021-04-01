@@ -1,6 +1,6 @@
 import DayItem from './DayItem';
 
-const Timesheet = ({ sideBarProp }) => {
+const Timesheet = ({ workData, sideBarProp }) => {
     const items = [];
 
     // actual date
@@ -15,7 +15,14 @@ const Timesheet = ({ sideBarProp }) => {
     weekdayFirstDatOfMonth = weekdayFirstDatOfMonth === 0 ? 7 : weekdayFirstDatOfMonth;
 
     for (let i = -weekdayFirstDatOfMonth + 2; i <= dayInMonth; i++) {
-        items.push(<DayItem key={i} day={i} currentDay={date.getDate() === i} sideBarProp={sideBarProp} />);
+        let theDate = [];
+        if (i > 0) {
+            let actualDate = new Date(year, month, i + 1);
+            let onlyDate = actualDate.toISOString().slice(0, 10);
+
+            theDate = workData.filter(item => item.date == onlyDate);
+        }
+        items.push(<DayItem key={i} day={i} currentDay={date.getDate() === i} sideBarProp={sideBarProp} theDate={theDate} />);
     }
 
     return(

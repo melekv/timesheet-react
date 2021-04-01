@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/data/{type}/{year_month}', function($type, $year_month) {
+    $lastDayOfMonth = date('t', strtotime($year_month . '-01'));
+    return response()->json(DB::table('timetable_' . $type)->whereBetween('date', [$year_month . '-01', $year_month . '-' . $lastDayOfMonth])->get());
+});

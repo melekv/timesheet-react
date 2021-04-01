@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Item from './Item';
 
-const DayItem = ({ day, currentDay, sideBarProp }) => {
-    const [state, setState] = useState([]);
+const DayItem = ({ day, currentDay, sideBarProp, theDate }) => {
+    const [state, setState] = useState(theDate.map((item, index) => <Item key={index} sideBarProp={sideBarProp} />));
 
     const addItem = () => {
         // max 3 activities per day
@@ -13,7 +13,7 @@ const DayItem = ({ day, currentDay, sideBarProp }) => {
         <div>
             <div className="d-flex justify-content-between" onClick={addItem}>
                 <div className={currentDay ? 'day-item-today' : ''}>{day > 0 ? day : ''}</div>
-                <div className="p-1">{state.length * 8}:00</div>
+                <div className="p-1"></div>
             </div>
             {state}
         </div>
